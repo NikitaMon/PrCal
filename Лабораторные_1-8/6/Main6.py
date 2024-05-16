@@ -8,23 +8,14 @@ __author__ = "Монастыршин Никита"
 https://ivtipm.github.io/Programming/Glava07/index07.htm#z178
 """
 import numpy as np
-import random
 from Function6 import *
-
-def lab6(n, mas):
-    res = 0 # подсчёт значений удовлетворяющих условие
-
-    for i in range(0,n):
-        if (mas[i]%3 == 0) and (mas[i]%5 != 0):
-            res = res + 1
-
-    return res
-
 
 
 if __name__ == "__main__":
     n = int (input("Введите число n "))
-    mas = np.random.randint (0, 100, n)
-    res = lab6(n, mas)
-    print_array(mas)
-    print_res(res)
+    mas = np.random.randint (0, 100, n) # Массив размера n со значениями от 0 до 99
+
+    res = lab6(mas)
+
+    print(f'Содержание массива: {mas}')
+    print(f'Результат: {res}')
