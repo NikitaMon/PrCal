@@ -8,7 +8,13 @@ from multiprocessing import shared_memory, Process
 
 # 
 def funk(p1,ip1,q1,iq1,max_iterations, infinity_border, shm_name, size1, size2):
-    """Вычисление точек и сохранение их в общую память"""
+    """Вычисление точек и сохранение их в общую память
+    p1, ip1, q1, iq1 - точки и их номера в массиве
+    max_iterations - максимальное количество итераций
+    infinity_border - если ушли на это расстояние, считаем, что ушли на бесконечность
+    shm_name - имя общей памяти
+    size1, size2 - размеры массива
+    """
 
     print("процесс запуск")
     # Получение доступа к общей памяти

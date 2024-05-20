@@ -6,7 +6,7 @@ import pandas as pd # DataFrame в которой сохраняются все 
 
 # Класс скрапера
 class ZabGuScraper:
-    """Класс для запросов на сайт и получение списка новостей пустём парсинга данных сайта"""
+    """Класс для запросов на сайт и получение списка новостей путём парсинга данных сайта"""
     #Конструктор
     def __init__(self) -> None:
         """Класс скрапера для сайта ЗабГу \n
@@ -65,16 +65,18 @@ class ZabGuScraper:
             self.df.to_csv(self.file_path + '/df.csv')
 
 
-
+    
     # Добавляет новые данные
     def update_df(self, content):
-        """Добовляет новые данные в DataFrame"""
+        """Добовляет новые данные в DataFrame
+        content - HTML код страницы
+        """
         soup = BeautifulSoup(content, 'lxml') # Парсер
         ad = soup.find_all('div', class_='news_line')
 
         pattern = "((preview_new)(_end)?)" # Регулярное выражение для получения всех новостей в строке
 
-        frame = [] # Список добавляемых файлов
+        frame = [] # Список добавляемых данных в DataFrame
         for i in range(len(ad)):
             ad1 = ad[i].find_all(class_ = re.compile(pattern))
             for j in range(len(ad1)):
@@ -125,6 +127,7 @@ class ZabGuScraper:
 
                 # Список добавляемых данных
                 pddata = [date, mark_list, news, link, file]
+                # Кортеж с данными
                 frame.append(pddata)
 
         #============================================
@@ -140,7 +143,7 @@ class ZabGuScraper:
         else:
             self.next_page = "None"
         #============================================
-
+        # frame - кортеж данных из n строк по 5 столбцов
         # Добавление всех новых данных в DataFrame
         for i in range(len(frame)):
             self.df.loc[len(self.df.index)] = frame[i]
